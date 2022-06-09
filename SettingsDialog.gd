@@ -13,6 +13,11 @@ func load_settings():
 	var override_width: LineEdit = $ScrollContainer/GridContainer/OverrideWidth
 	override_width.text = String(Settings.override_size_width)
 
+	var init_window_position_x: LineEdit = $ScrollContainer/GridContainer/InitWindowPositionX
+	init_window_position_x.text = String(Settings.init_window_position_x)
+	var init_window_position_y: LineEdit = $ScrollContainer/GridContainer/InitWindowPositionY
+	init_window_position_y.text = String(Settings.init_window_position_y)
+
 	var autolaunch_burrito_link: CheckButton = $ScrollContainer/GridContainer/AutoLaunchBurritoLink
 	autolaunch_burrito_link.pressed = Settings.burrito_link_auto_launch_enabled
 	var wine_path: LineEdit = $ScrollContainer/GridContainer/WinePath
@@ -32,6 +37,11 @@ func save_settings(new_value=null):
 	Settings.override_size_height = int(override_height.text)
 	var override_width: LineEdit = $ScrollContainer/GridContainer/OverrideWidth
 	Settings.override_size_width = int(override_width.text)
+
+	var init_window_position_x: LineEdit = $ScrollContainer/GridContainer/InitWindowPositionX
+	Settings.init_window_position_x = int(init_window_position_x.text)
+	var init_window_position_y: LineEdit = $ScrollContainer/GridContainer/InitWindowPositionY
+	Settings.init_window_position_y = int(init_window_position_y.text)
 
 	var autolaunch_burrito_link: CheckButton = $ScrollContainer/GridContainer/AutoLaunchBurritoLink
 	Settings.burrito_link_auto_launch_enabled = autolaunch_burrito_link.pressed

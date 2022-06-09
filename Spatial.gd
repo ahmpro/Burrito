@@ -47,6 +47,10 @@ var taco_parser: TacoParser
 var x11_window_id_burrito: int
 var is_transient:bool = false
 
+
+func _init():
+	OS.set_window_position(Vector2(0, 15))
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().get_root().set_transparent_background(true)
@@ -61,7 +65,7 @@ func _ready():
 	else:
 		OS.window_size = Vector2(Settings.minimum_width, Settings.minimum_height)
 	# Postion at top left corner
-	OS.set_window_position(Vector2(0,0))
+	OS.set_window_position(Vector2(Settings.init_window_position_x, Settings.init_window_position_y))
 	set_minimal_mouse_block()
 	server.listen(4242)
 
@@ -242,6 +246,7 @@ func decode_frame_packet(spb: StreamPeerBuffer):
 
 	var map_size = get_viewport().size
 	var map_corner = Vector2(0, 0)
+	var window_delta = Vector2(Settings.init_window_position_x, Settings.init_window_position_y)
 
 	if (!map_is_open):
 		map_size = Vector2(compass_width, compass_height)
@@ -252,9 +257,9 @@ func decode_frame_packet(spb: StreamPeerBuffer):
 
 	var player_map_position: Vector2 = Vector2(player_position.x, -player_position.z)*map_object_scaling
 
-	var delta_position = Vector2(0,0)
+	var delta_position = Vector2(Settings.init_window_position_x, Settings.init_window_position_y)
 	if (map_rotation != 0 && !map_is_open):
-		var pivot = Vector2(0,0)
+		var pivot = Vector2(0, 0)
 		var radians = map_rotation
 
 		var cosTheta = cos(radians)
@@ -274,7 +279,7 @@ func decode_frame_packet(spb: StreamPeerBuffer):
 
 	$Control/MiniMap.scale=Vector2(map_object_scaling, map_object_scaling)
 	var map_translation = map_offset
-	$Control/MiniMap.position = (map_translation / map_scale) + map_midpoint - player_map_position + delta_position
+	$Control/MiniMap.position = (map_translation / map_scale) + map_midpoint - player_map_position + delta_position + window_delta
 	var new_feet_location = Vector3(player_position.x, player_position.y, -player_position.z)
 	$FeetLocation.translation = new_feet_location
 
@@ -304,6 +309,7 @@ func decode_context_packet(spb: StreamPeerBuffer):
 			size.y = Settings.minimum_height
 
 	OS.window_size = size
+	OS.set_window_position(Vector2(Settings.init_window_position_x, Settings.init_window_position_y))
 	var identity_length: int = spb.get_32()
 	var identity_str = spb.get_utf8_string(identity_length)
 	var identity = JSON.parse(identity_str).result
@@ -346,7 +352,7 @@ func decode_timeout_packet(spb: StreamPeerBuffer):
 
 func reset_minimap_masks():
 	var viewport_size = get_viewport().size
-	compass_corner1 = Vector2(0, 0)
+	compass_corner1 = Vector2(Settings.init_window_position_x, Settings.init_window_position_y)
 	compass_corner2 = viewport_size
 	if !map_is_open && !compass_is_top_right:
 		compass_corner1 = Vector2(viewport_size.x-compass_width, 36)

@@ -15,6 +15,9 @@ var burrito_link_auto_launch_enabled: bool = false
 var burrito_link_wine_path: String = ""
 var burrito_link_env_args: String = ""
 
+var init_window_position_x: int = 0
+var init_window_position_y: int = 0
+
 
 func _ready():
 	var file = File.new()
@@ -42,6 +45,10 @@ func _ready():
 		self.burrito_link_wine_path = self._config_data["burrito_link_wine_path"]
 	if "burrito_link_env_args" in self._config_data:
 		self.burrito_link_env_args = self._config_data["burrito_link_env_args"]
+	if "init_window_position_x" in self._config_data:
+		self.init_window_position_x = self._config_data["init_window_position_x"]
+	if "init_window_position_y" in self._config_data:
+		self.init_window_position_y = self._config_data["init_window_position_y"]
 
 
 func save():
@@ -54,6 +61,8 @@ func save():
 		"burrito_link_auto_launch_enabled": burrito_link_auto_launch_enabled,
 		"burrito_link_wine_path": burrito_link_wine_path,
 		"burrito_link_env_args": burrito_link_env_args,
+		"init_window_position_x": init_window_position_x,
+		"init_window_position_y": init_window_position_y,
 	}
 
 	var file = File.new()

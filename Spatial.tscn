@@ -759,6 +759,32 @@ margin_bottom = 336.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 
+[node name="InitWindowPositionXLabel" type="Label" parent="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer"]
+margin_top = 340.0
+margin_right = 384.0
+margin_bottom = 364.0
+text = "Init Window Position X"
+
+[node name="InitWindowPositionX" type="LineEdit" parent="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer"]
+margin_left = 116.0
+margin_top = 340.0
+margin_right = 384.0
+margin_bottom = 364.0
+size_flags_horizontal = 3
+
+[node name="InitWindowPositionYLabel" type="Label" parent="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer"]
+margin_top = 344.0
+margin_right = 384.0
+margin_bottom = 372.0
+text = "Init Window Position Y"
+
+[node name="InitWindowPositionY" type="LineEdit" parent="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer"]
+margin_left = 116.0
+margin_top = 344.0
+margin_right = 384.0
+margin_bottom = 372.0
+size_flags_horizontal = 3
+
 [node name="Spacer" type="Control" parent="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer"]
 visible = false
 margin_top = 284.0
@@ -907,3 +933,5 @@ material/0 = SubResource( 4 )
 [connection signal="pressed" from="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer/AutoLaunchBurritoLink" to="Control/Dialogs/SettingsDialog" method="save_settings"]
 [connection signal="text_changed" from="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer/WinePath" to="Control/Dialogs/SettingsDialog" method="save_settings"]
 [connection signal="text_changed" from="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer/EnvironmentVars" to="Control/Dialogs/SettingsDialog" method="save_settings"]
+[connection signal="text_changed" from="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer/InitWindowPositionX" to="Control/Dialogs/SettingsDialog" method="save_settings"]
+[connection signal="text_changed" from="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer/InitWindowPositionY" to="Control/Dialogs/SettingsDialog" method="save_settings"]
